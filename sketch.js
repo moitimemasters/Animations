@@ -7,11 +7,12 @@ for (let i = 0; i < 40; ++i) {
     target.style.top = Math.random() * center_y * 2 + "px";
 
 }
-for (let i = 20; i < 40; ++i) {
+for (let i = 19; i < 40; ++i) {
     target = document.getElementById("b" + (i + 1));
     target.style.background = "rgba(135, 218, 27, .1)";
 }
-state = 0;
+let state = 0;
+let animating = 0;
 
 function on_bricks_clicked() {
     let brick_width = 75;
@@ -89,6 +90,7 @@ function on_bricks_clicked() {
         }
 
         for (let i = 0; i < 19; ++i) {
+            animating = 1;
             target = "#b" + (i + 1);
             // console.log("ok");
             x = places[i].x;
@@ -97,7 +99,7 @@ function on_bricks_clicked() {
                 targets: target,
                 left: x,
                 top: y,
-                easing: "easeInOutBounce",
+                easing: "easeInOutExpo",
                 duration: Math.random() * 3000 + 1000,
             });
         }
@@ -105,15 +107,16 @@ function on_bricks_clicked() {
             targets: ".boi",
             color: "rgba(233, 160, 42, 1)",
             duration: 4000,
-            easing: "easeInOutBounce",
+            easing: "easeInOutExpo",
         });
         state = 1;
+        animating = 0;
     } else {
-        for (let i = 0; i < 19; ++i) {
+        for (let i = 0; i < 40; ++i) {
             coords = { x: Math.random() * center_x * 2, y: Math.random() * center_y * 2 }
             places.push(coords);
         }
-        for (let i = 0; i < 19; ++i) {
+        for (let i = 0; i < 40; ++i) {
             target = "#b" + (i + 1);
             // console.log("ok");
             x = places[i].x;
@@ -122,7 +125,7 @@ function on_bricks_clicked() {
                 targets: target,
                 left: x,
                 top: y,
-                easing: "easeInOutBounce",
+                easing: "easeInOutExpo",
                 duration: Math.random() * 3000 + 1000,
             });
         }
